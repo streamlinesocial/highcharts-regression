@@ -1,0 +1,38 @@
+{
+	"name": "Highcharts regression",
+	"version": "1.0",
+	"title": "Highcharts regression",
+	"author": {
+		"name": "Ignacio Vazquez",
+		"url": ""
+	},
+	"licenses": [
+		{
+			"type": "",
+			"url": ""
+		}
+	],
+	"dependencies": {
+		"highcharts": ""
+	},
+	"description": "",
+	"keywords": [
+		"",
+		""
+	],
+	"homepage": "",	
+	"docs": "",	
+	"bugs": "",
+	"download": "",
+	"demo": [
+		"",
+		""
+	],
+	"maintainers": [
+		{
+			"name": "Ignacio Vazquez",
+			"email": "elpepe.uy@gmail.com",
+			"url": ""
+		}
+	]	
+}
