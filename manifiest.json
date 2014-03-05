@@ -1,29 +1,31 @@
 {
 	"name": "Highcharts regression",
 	"version": "1.0",
-	"title": "Highcharts regression",
+	"title": "Highcharts regression - Linear and non-linear regression for highcharts",
 	"author": {
 		"name": "Ignacio Vazquez",
-		"url": ""
+		"url": "https://github.com/phpepe/"
 	},
 	"licenses": [
 		{
-			"type": "",
-			"url": ""
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/MIT"
 		}
 	],
 	"dependencies": {
-		"highcharts": ""
+		"highcharts": "3"
 	},
 	"description": "",
 	"keywords": [
-		"",
-		""
+		"highcharts",
+		"regression",
+		"trendline",
+		"loess fitline"
 	],
-	"homepage": "",	
+	"homepage": "https://github.com/phpepe/highcharts-regression",	
 	"docs": "",	
-	"bugs": "",
-	"download": "",
+	"bugs": "https://github.com/phpepe/highcharts-regression/issues",
+	"download": "https://github.com/phpepe/highcharts-regression/archive/master.zip",
 	"demo": [
 		"",
 		""
@@ -32,7 +34,7 @@
 		{
 			"name": "Ignacio Vazquez",
 			"email": "elpepe.uy@gmail.com",
-			"url": ""
+			"url": "https://github.com/phpepe/"
 		}
 	]	
 }
