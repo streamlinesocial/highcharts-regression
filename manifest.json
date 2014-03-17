@@ -27,8 +27,9 @@
 	"bugs": "https://github.com/phpepe/highcharts-regression/issues",
 	"download": "https://github.com/phpepe/highcharts-regression/archive/master.zip",
 	"demo": [
-		"",
-		""
+		"http://jsfiddle.net/phpepe/YxssC/3/",
+		"http://jsfiddle.net/phpepe/dKLDc/1/"
+		
 	],
 	"maintainers": [
 		{
