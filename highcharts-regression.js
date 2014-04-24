@@ -7,7 +7,7 @@
     	var i = 0 ;
     	for (i = 0 ; i < series.length ; i++){
     		var s = series[i];
-    		if ( s.regression  ) {
+    		if ( s.regression && !s.rendered ) {
     			s.regressionSettings =  s.regressionSettings || {} ;
     			var regressionType = s.regressionSettings.type || "linear" ;
     			var regression; 
@@ -52,10 +52,13 @@
     			
                 extraSerie.regressionOutputs = regression ;
     			extraSeries.push(extraSerie) ;
+                arguments[1].series[i].rendered = true;
     		}
     	}
 
+
     	arguments[1].series = series.concat(extraSeries);
+
     	proceed.apply(this, Array.prototype.slice.call(arguments, 1));
 
         
@@ -246,8 +249,23 @@
      */
     function _loess (data, bandwidth) {
     	var bandwidth = bandwidth || 0.25 ;
+    	console.debug("loess bandwidth", bandwidth);
+    	
     	var xval = data.map(function(pair){return pair[0]});
+    	var distinctX =  array_unique(xval) ;
+    	if (  2 / distinctX.length  > bandwidth ) {
+    		bandwidth = Math.min( 2 / distinctX.length, 1 );
+    		console.warn("updated bandwith to "+ bandwidth);
+    	}
+    	
     	var yval = data.map(function(pair){return pair[1]});
+    	
+    	function array_unique(values) {
+    		var o = {}, i, l = values.length, r = [];
+    	    for(i=0; i<l;i+=1) o[values[i]] = values[i];
+    	    for(i in o) r.push(o[i]);
+    	    return r;
+    	}
     	
     	function tricube(x) {
     		var tmp = 1 - x * x * x;
@@ -262,7 +280,7 @@
     	for(var i in xval)
     	{
     		var x = xval[i];
-
+	
     		if (i > 0) {
     			if (right < xval.length - 1 &&
     					xval[right+1] - xval[i] < xval[i] - xval[left]) {
@@ -270,15 +288,13 @@
     				right++;
     			}
     		}
-
+    		//console.debug("left: "+left  + " right: " + right );
     		var edge;
     		if (xval[i] - xval[left] > xval[right] - xval[i])
     			edge = left;
     		else
     			edge = right;
-
     		var denom = Math.abs(1.0 / (xval[edge] - x));
-
     		var sumWeights = 0;
     		var sumX = 0, sumXSquared = 0, sumY = 0, sumXY = 0;
 
@@ -304,6 +320,7 @@
     		}
 
     		var meanX = sumX / sumWeights;
+    		//console.debug(meanX);
     		var meanY = sumY / sumWeights;
     		var meanXY = sumXY / sumWeights;
     		var meanXSquared = sumXSquared / sumWeights;
@@ -315,9 +332,9 @@
     			beta = (meanXY - meanX * meanY) / (meanXSquared - meanX * meanX);
 
     		var alpha = meanY - beta * meanX;
-
     		res[i] = beta * x + alpha;
     	}
+    	console.debug(res);
     	return { 
     		equation: "" , 
     		points: xval.map(function(x,i){return [x, res[i]]}), 
