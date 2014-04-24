@@ -13,7 +13,7 @@
 		}
 	],
 	"dependencies": {
-		"highcharts": "3.0.0"
+		"highcharts": "=>3.0.0"
 	},
 	"description": "This allows you to add regression lines to any series. Supports: linear, polynomial, logarithmic, exponential and loess. Calculates the r-value",
 	"keywords": [
