@@ -1,6 +1,6 @@
 {
 	"name": "Highcharts regression",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"title": "Highcharts regression - Linear and non-linear regression for highcharts",
 	"author": {
 		"name": "Ignacio Vazquez",
@@ -27,7 +27,8 @@
 	"bugs": "https://github.com/phpepe/highcharts-regression/issues",
 	"download": "https://github.com/phpepe/highcharts-regression/archive/master.zip",
 	"demo": [
-		"http://jsfiddle.net/phpepe/3vruC/"			
+		"http://jsfiddle.net/phpepe/3vruC/",
+		"http://jsfiddle.net/phpepe/sMJv9/"			
 	],
 	"maintainers": [
 		{
