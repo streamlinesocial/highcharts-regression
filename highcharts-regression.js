@@ -249,7 +249,6 @@
      */
     function _loess (data, bandwidth) {
     	var bandwidth = bandwidth || 0.25 ;
-    	console.debug("loess bandwidth", bandwidth);
     	
     	var xval = data.map(function(pair){return pair[0]});
     	var distinctX =  array_unique(xval) ;

@@ -1,6 +1,6 @@
 {
 	"name": "Highcharts regression",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"title": "Highcharts regression - Linear and non-linear regression for highcharts",
 	"author": {
 		"name": "Ignacio Vazquez",
