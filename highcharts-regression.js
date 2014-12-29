@@ -1,3 +1,13 @@
+/* Code extracted from https://github.com/Tom-Alexander/regression-js/
+ 
+ Modifications of december '14 :
+
+	- add linetype ("spline" by default)
+	- add the tooltip value suffix
+	- add order configuration (2 by default) of polynomial	 	
+	
+*/
+
 (function (H) {
     
 
@@ -18,20 +28,24 @@
                         lineWidth: 2,
                         marker: {enabled: false} ,
                         isRegressionLine: true,
-                        name: s.regressionSettings.label || "Equation: %eq",
+                        type: s.regressionSettings.linetype || 'spline',
+                        name: s.regressionSettings.name || "Equation: %eq", 
                         color: s.regressionSettings.color || '',
+                        tooltip:{ 
+	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
+	                        	}
                 };
                 
-
-                extraSerie.type = "spline";
                 
                 if (regressionType == "linear") {
                     regression = _linear(s.data) ;
                     extraSerie.type = "line";
                 }else if (regressionType == "exponential") {
                     regression = _exponential(s.data) 
-                }else if (regressionType == "polynomial"){
-                    regression = _polynomial(s.data, 2) ;
+                }                                
+                else if (regressionType == "polynomial"){  
+	                var order = s.regressionSettings.order || 2
+                    regression = _polynomial(s.data, order) ;                    
                 }else if (regressionType == "logarithmic"){
                     regression = _logarithmic(s.data) ;
                 }else if (regressionType == "loess"){
@@ -48,11 +62,11 @@
                 extraSerie.data = regression.points ;
                 extraSerie.name = extraSerie.name.replace("%r2",regression.rSquared);
                 extraSerie.name = extraSerie.name.replace("%r",regression.rValue);
-                extraSerie.name = extraSerie.name.replace("%eq",regression.string);
+                extraSerie.name = extraSerie.name.replace("%eq",regression.string);               
                 
                 extraSerie.regressionOutputs = regression ;
                 extraSeries.push(extraSerie) ;
-                arguments[1].series[i].rendered = true;
+                arguments[1].series[i].rendered = true;                           
             }
         }
 
@@ -237,7 +251,7 @@
      */
     function _polynomial(data, order) {
         if(typeof order == 'undefined'){
-            order = 2;
+            order =2;
         }
         var lhs = [], rhs = [], results = [], a = 0, b = 0, i = 0, k = order + 1;
 
