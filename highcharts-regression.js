@@ -19,6 +19,8 @@
             var s = series[i];
             if ( s.regression && !s.rendered ) {
                 s.regressionSettings =  s.regressionSettings || {} ;
+                s.regressionSettings.tooltip = s.regressionSettings.tooltip || {} ;
+
                 var regressionType = s.regressionSettings.type || "linear" ;
                 var regression; 
                 var extraSerie = {
@@ -33,7 +35,7 @@
                         color: s.regressionSettings.color || '',
                         tooltip:{ 
 	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
-	                        	}
+                    	}
                 };
                 
                 

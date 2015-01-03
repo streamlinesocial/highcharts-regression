@@ -1,0 +1,49 @@
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<script src="../highcharts-regression.js"> </script>
+
+
+<script>
+$(function() {
+
+	$.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+		// Create the chart
+		$('#container').highcharts('StockChart', {
+			
+
+			rangeSelector : {
+				selected : 1,
+				inputEnabled: $('#container').width() > 480
+			},
+
+			title : {
+				text : 'AAPL Stock Price'
+			},
+			
+			series : [{
+				name : 'AAPL',
+                type: 'scatter',
+                pointWith: 1,
+				data : data,
+				tooltip: {
+					valueDecimals: 2
+				},
+                regression: true ,
+                regressionSettings: {
+                    type: 'loess',
+                    color:  '#1111cc',
+                    loessSmooth: 50
+                    
+                },
+			}]
+		});
+	});
+
+});
+</script>
+
+
+<div id="container" style="height: 400px; min-width: 310px"></div>
