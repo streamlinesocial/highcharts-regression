@@ -1,10 +1,8 @@
 /* Code extracted from https://github.com/Tom-Alexander/regression-js/
  
- Modifications of december '14 :
+ Modifications of January 5, 2015
 
-	- add linetype ("spline" by default)
-	- add the tooltip value suffix
-	- add order configuration (2 by default) of polynomial	 	
+	- Add dashStyle ('' by default)
 	
 */
 
@@ -20,6 +18,7 @@
             if ( s.regression && !s.rendered ) {
                 s.regressionSettings =  s.regressionSettings || {} ;
                 s.regressionSettings.tooltip = s.regressionSettings.tooltip || {} ;
+                s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || {};
 
                 var regressionType = s.regressionSettings.type || "linear" ;
                 var regression; 
@@ -33,6 +32,7 @@
                         type: s.regressionSettings.linetype || 'spline',
                         name: s.regressionSettings.name || "Equation: %eq", 
                         color: s.regressionSettings.color || '',
+                        dashStyle: s.regressionSettings.dashStyle || '',
                         tooltip:{ 
 	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
                     	}
