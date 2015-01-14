@@ -18,7 +18,7 @@
             if ( s.regression && !s.rendered ) {
                 s.regressionSettings =  s.regressionSettings || {} ;
                 s.regressionSettings.tooltip = s.regressionSettings.tooltip || {} ;
-                s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || {};
+                s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || 'solid';
 
                 var regressionType = s.regressionSettings.type || "linear" ;
                 var regression; 
