@@ -32,7 +32,7 @@
                         type: s.regressionSettings.linetype || 'spline',
                         name: s.regressionSettings.name || "Equation: %eq", 
                         color: s.regressionSettings.color || '',
-                        dashStyle: s.regressionSettings.dashStyle || '',
+                        dashStyle: s.regressionSettings.dashStyle || 'solid',
                         tooltip:{ 
 	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
                     	}
