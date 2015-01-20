@@ -40,7 +40,8 @@
                 
                 
                 if (regressionType == "linear") {
-                    regression = _linear(s.data) ;
+                    var projectX = s.regressionSettings.linear_projection || 0;
+                    regression = _linear(s.data, projectX);
                     extraSerie.type = "line";
                 }else if (regressionType == "exponential") {
                     regression = _exponential(s.data) 
@@ -135,7 +136,7 @@
      * correlation = N * Σ(XY) - Σ(X) * Σ (Y) / √ (  N * Σ(X^2) - Σ(X) ) * ( N * Σ(Y^2) - Σ(Y)^2 ) ) )
      * 
      */
-    function _linear(data) {
+    function _linear(data, projectX) {
         var sum = [0, 0, 0, 0, 0], n = 0, results = [], N = data.length;
 
         for (; n < data.length; n++) {
@@ -159,6 +160,10 @@
         for (var i = 0, len = data.length; i < len; i++) {
             var coordinate = [data[i][0], data[i][0] * gradient + intercept];
             results.push(coordinate);
+        }
+        
+        if(projectX != 0){
+            results.push([projectX, projectX * gradient + intercept]);
         }
 
         results.sort(function(a,b){
