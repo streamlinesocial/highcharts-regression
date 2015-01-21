@@ -17,26 +17,21 @@
             var s = series[i];
             if ( s.regression && !s.rendered ) {
                 s.regressionSettings =  s.regressionSettings || {} ;
-                s.regressionSettings.tooltip = s.regressionSettings.tooltip || {} ;
-                s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || 'solid';
-
-                var regressionType = s.regressionSettings.type || "linear" ;
-                var regression; 
-                var extraSerie = {
-                        data:[],
-                        color: s.color ,
-                        yAxis: s.yAxis ,
-                        lineWidth: 2,
-                        marker: {enabled: false} ,
-                        isRegressionLine: true,
-                        type: s.regressionSettings.linetype || 'spline',
-                        name: s.regressionSettings.name || "Equation: %eq", 
-                        color: s.regressionSettings.color || '',
-                        dashStyle: s.regressionSettings.dashStyle || 'solid',
-                        tooltip:{ 
-	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
-                    	}
-                };
+                
+                //-- Add default properties
+                var extraSerie = s.regressionSettings;
+                extraSerie.data = [];
+                extraSerie.lineWidth = extraSerie.lineWidth || 2;
+                extraSerie.marker = extraSerie.marker || {enabled: false};
+                extraSerie.isRegressionLine = true;
+                extraSerie.type = extraSerie.type || 'linear';
+                extraSerie.name = extraSerie.name || "Equation: %eq";
+                extraSerie.color = extraSerie.color || '';
+                extraSeries.dashStyle = extraSerie.dashStyle || 'solid';
+                extraSeries.tooltip = extraSeries.tooltip || {valueSuffix : ' '};
+                
+                var regressionType = extraSerie.type;
+                var regression;
                 
                 
                 if (regressionType == "linear") {
