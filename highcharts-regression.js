@@ -149,12 +149,14 @@
             sum[2] += data[n][0] * data[n][0]; //Σ(X^2)
             sum[3] += data[n][0] * data[n][1]; //Σ(XY)
             sum[4] += data[n][1] * data[n][1]; //Σ(Y^2)
+          } else {
+            N -= 1;
           }
         }
 
-        var gradient = (n * sum[3] - sum[0] * sum[1]) / (n * sum[2] - sum[0] * sum[0]);
-        var intercept = (sum[1] / n) - (gradient * sum[0]) / n;
-        //var correlation = (n * sum[3] - sum[0] * sum[1]) / Math.sqrt((n * sum[2] - sum[0] * sum[0]) * (n * sum[4] - sum[1] * sum[1]));
+        var gradient = (N * sum[3] - sum[0] * sum[1]) / (N * sum[2] - sum[0] * sum[0]);
+        var intercept = (sum[1] / N) - (gradient * sum[0]) / N;
+        // var correlation = (N * sum[3] - sum[0] * sum[1]) / Math.sqrt((N * sum[2] - sum[0] * sum[0]) * (N * sum[4] - sum[1] * sum[1]));
         
         for (var i = 0, len = data.length; i < len; i++) {
             var coordinate = [data[i][0], data[i][0] * gradient + intercept];
@@ -446,17 +448,24 @@
      */
     function coefficientOfDetermination (data, pred ) {
         
-        var i = SSE = SSYY =  mean = 0;
+        var i = SSE = SSYY =  mean = 0, N = data.length;
 
         // Calc the mean
         for (i = 0 ; i < data.length ; i++ ){
-            mean +=  data[i][1] / data.length ;
+            if (data[i][1]) {
+                mean += data[i][1];
+            } else {
+                N--;
+            }
         }
+        mean /= N;
         
         // Calc the coefficent of determination 
         for (i = 0 ; i < data.length ; i++ ){
-            SSYY +=  Math.pow( data[i][1] -  pred[i][1] , 2) ;
-            SSE +=  Math.pow( data[i][1] -  mean , 2) ;
+            if (data[i][1]) {
+                SSYY +=  Math.pow( data[i][1] -  pred[i][1] , 2) ;
+                SSE +=  Math.pow( data[i][1] -  mean , 2) ;
+            }
         }
         return  1 - ( SSYY / SSE)  ;
     }
