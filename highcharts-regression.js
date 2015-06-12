@@ -19,6 +19,7 @@
                 s.regressionSettings =  s.regressionSettings || {} ;
                 s.regressionSettings.tooltip = s.regressionSettings.tooltip || {} ;
                 s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || 'solid';
+                s.regressionSettings.decimalPlaces = s.regressionSettings.decimalPlaces || 2;
 
                 var regressionType = s.regressionSettings.type || "linear" ;
                 var regression; 
@@ -59,8 +60,9 @@
                 }
 
                 
-                regression.rSquared =  coefficientOfDetermination(s.data, regression.points).toFixed(2);
-                regression.rValue = Math.sqrt(regression.rSquared,2).toFixed(2) ;
+                regression.rSquared =  coefficientOfDetermination(s.data, regression.points);
+                regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
+                regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
                 extraSerie.data = regression.points ;
                 extraSerie.name = extraSerie.name.replace("%r2",regression.rSquared);
                 extraSerie.name = extraSerie.name.replace("%r",regression.rValue);
