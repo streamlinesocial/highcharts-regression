@@ -63,10 +63,12 @@
                 regression.rSquared =  coefficientOfDetermination(s.data, regression.points);
                 regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
                 regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
+                regression.standardError = standardError(s.data, regression.points).toFixed(s.regressionSettings.decimalPlaces);
                 extraSerie.data = regression.points ;
                 extraSerie.name = extraSerie.name.replace("%r2",regression.rSquared);
                 extraSerie.name = extraSerie.name.replace("%r",regression.rValue);
-                extraSerie.name = extraSerie.name.replace("%eq",regression.string);               
+                extraSerie.name = extraSerie.name.replace("%eq",regression.string);
+                extraSerie.name = extraSerie.name.replace("%se", regression.standardError);
                 
                 extraSerie.regressionOutputs = regression ;
                 extraSeries.push(extraSerie) ;
@@ -470,6 +472,21 @@
             }
         }
         return  1 - ( SSYY / SSE)  ;
+    }
+
+    function standardError(data, pred) {
+        var SE = 0, N = data.length;
+
+        for (i = 0 ; i < data.length ; i++ ) {
+            if (data[i][1]) {
+                SE += Math.pow(data[i][1] - pred[i][1], 2);
+            } else {
+                N--;
+            }
+        }
+        SE = Math.sqrt(SE / (N-2));
+
+        return SE;
     }
 
 
