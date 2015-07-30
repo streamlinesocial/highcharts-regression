@@ -41,7 +41,7 @@
                 
                 
                 if (regressionType == "linear") {
-                    regression = _linear(s.data) ;
+                    regression = _linear(s.data,s.regressionSettings.decimalPlaces) ;
                     extraSerie.type = "line";
                 }else if (regressionType == "exponential") {
                     regression = _exponential(s.data) 
@@ -139,7 +139,7 @@
      * correlation = N * Σ(XY) - Σ(X) * Σ (Y) / √ (  N * Σ(X^2) - Σ(X) ) * ( N * Σ(Y^2) - Σ(Y)^2 ) ) )
      * 
      */
-    function _linear(data) {
+    function _linear(data, decimalPlaces) {
         var sum = [0, 0, 0, 0, 0], n = 0, results = [], N = data.length;
 
         for (; n < data.length; n++) {
@@ -163,7 +163,10 @@
         // var correlation = (N * sum[3] - sum[0] * sum[1]) / Math.sqrt((N * sum[2] - sum[0] * sum[0]) * (N * sum[4] - sum[1] * sum[1]));
         
         for (var i = 0, len = data.length; i < len; i++) {
-            var coordinate = [data[i][0], data[i][0] * gradient + intercept];
+			var coorY = data[i][0] * gradient + intercept;
+			if (decimalPlaces)
+				coorY = parseFloat(coorY.toFixed(decimalPlaces));
+            var coordinate = [data[i][0], coorY];
             results.push(coordinate);
         }
 
