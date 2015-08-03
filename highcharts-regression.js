@@ -2,8 +2,8 @@
  
  Modifications of January 5, 2015
 
-	- Add dashStyle ('' by default)
-	
+    - Add dashStyle ('' by default)
+    
 */
 
 (function (H) {
@@ -35,10 +35,9 @@
                         color: s.regressionSettings.color || '',
                         dashStyle: s.regressionSettings.dashStyle || 'solid',
                         tooltip:{ 
-	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
-                    	}
+                                valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
+                        }
                 };
-                
                 
                 if (regressionType == "linear") {
                     regression = _linear(s.data,s.regressionSettings.decimalPlaces) ;
@@ -47,7 +46,7 @@
                     regression = _exponential(s.data) 
                 }                                
                 else if (regressionType == "polynomial"){  
-	                var order = s.regressionSettings.order || 2
+                    var order = s.regressionSettings.order || 2
                     regression = _polynomial(s.data, order) ;                    
                 }else if (regressionType == "logarithmic"){
                     regression = _logarithmic(s.data) ;
@@ -60,7 +59,7 @@
                 }
 
                 
-                regression.rSquared =  coefficientOfDetermination(s.data, regression.points);
+                regression.rSquared =  coefficientOfDetermination(s.data, regression.unsortedData);
                 regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
                 regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
                 regression.standardError = standardError(s.data, regression.points).toFixed(s.regressionSettings.decimalPlaces);
@@ -90,7 +89,7 @@
      * Code extracted from https://github.com/Tom-Alexander/regression-js/
      */
     function _exponential(data) {
-        var sum = [0, 0, 0, 0, 0, 0], n = 0, results = [];
+        var sum = [0, 0, 0, 0, 0, 0], n = 0, results = [], unsortedData=[];
 
         for (len = data.length; n < len; n++) {
           if (data[n]['x']) {
@@ -114,6 +113,7 @@
         for (var i = 0, len = data.length; i < len; i++) {
             var coordinate = [data[i][0], A * Math.pow(Math.E, B * data[i][0])];
             results.push(coordinate);
+            unsortedData.push(coordinate);
         }
 
         results.sort(function(a,b){
@@ -124,7 +124,7 @@
 
         var string = 'y = ' + Math.round(A*100) / 100 + 'e^(' + Math.round(B*100) / 100 + 'x)';
 
-        return {equation: [A, B], points: results, string: string};
+        return {equation: [A, B], unsortedData :unsortedData, points: results, string: string};
     } 
     
     
@@ -140,7 +140,7 @@
      * 
      */
     function _linear(data, decimalPlaces) {
-        var sum = [0, 0, 0, 0, 0], n = 0, results = [], N = data.length;
+        var sum = [0, 0, 0, 0, 0], n = 0, results = [], unsortedData=[], N = data.length;
 
         for (; n < data.length; n++) {
           if (data[n]['x']) {
@@ -163,11 +163,12 @@
         // var correlation = (N * sum[3] - sum[0] * sum[1]) / Math.sqrt((N * sum[2] - sum[0] * sum[0]) * (N * sum[4] - sum[1] * sum[1]));
         
         for (var i = 0, len = data.length; i < len; i++) {
-			var coorY = data[i][0] * gradient + intercept;
-			if (decimalPlaces)
-				coorY = parseFloat(coorY.toFixed(decimalPlaces));
+            var coorY = data[i][0] * gradient + intercept;
+            if (decimalPlaces)
+                coorY = parseFloat(coorY.toFixed(decimalPlaces));
             var coordinate = [data[i][0], coorY];
             results.push(coordinate);
+            unsortedData.push(coordinate);
         }
 
         results.sort(function(a,b){
@@ -177,14 +178,14 @@
         });
 
         var string = 'y = ' + Math.round(gradient*100) / 100 + 'x + ' + Math.round(intercept*100) / 100;
-        return {equation: [gradient, intercept], points: results, string: string};
+        return {equation: [gradient, intercept], unsortedData :unsortedData, points: results, string: string};
     }
     
     /**
      *  Code extracted from https://github.com/Tom-Alexander/regression-js/
      */
     function _logarithmic(data) {
-        var sum = [0, 0, 0, 0], n = 0, results = [],mean = 0 ;
+        var sum = [0, 0, 0, 0], n = 0, results = [], unsortedData=[],mean = 0 ;
         
 
         for (len = data.length; n < len; n++) {
@@ -206,6 +207,7 @@
         for (var i = 0, len = data.length; i < len; i++) {
             var coordinate = [data[i][0], A + B * Math.log(data[i][0])];
             results.push(coordinate);
+            unsortedData.push(coordinate);
         }
 
         results.sort(function(a,b){
@@ -216,14 +218,14 @@
 
         var string = 'y = ' + Math.round(A*100) / 100 + ' + ' + Math.round(B*100) / 100 + ' ln(x)';
         
-        return {equation: [A, B], points: results, string: string};
+        return {equation: [A, B], unsortedData :unsortedData, points: results, string: string};
     }
     
     /**
      * Code extracted from https://github.com/Tom-Alexander/regression-js/
      */
     function _power(data) {
-        var sum = [0, 0, 0, 0], n = 0, results = [];
+        var sum = [0, 0, 0, 0], n = 0, results = [], unsortedData=[];
 
         for (len = data.length; n < len; n++) {
           if (data[n]['x']) {
@@ -244,6 +246,7 @@
         for (var i = 0, len = data.length; i < len; i++) {
             var coordinate = [data[i][0], A * Math.pow(data[i][0] , B)];
             results.push(coordinate);
+            unsortedData.push(coordinate);
         }
 
         results.sort(function(a,b){
@@ -253,8 +256,8 @@
         });
 
         var string = 'y = ' + Math.round(A*100) / 100 + 'x^' + Math.round(B*100) / 100;
-
-        return {equation: [A, B], points: results, string: string};
+        
+        return {equation: [A, B], unsortedData :unsortedData, points: results, string: string};
     }
     
     /**
@@ -264,7 +267,7 @@
         if(typeof order == 'undefined'){
             order =2;
         }
-        var lhs = [], rhs = [], results = [], a = 0, b = 0, i = 0, k = order + 1;
+        var lhs = [], rhs = [], results = [], unsortedData=[], a = 0, b = 0, i = 0, k = order + 1;
 
         for (; i < k; i++) {
             for (var l = 0, len = data.length; l < len; l++) {
@@ -298,6 +301,7 @@
                 answer += equation[w] * Math.pow(data[i][0], w);
             }
             results.push([data[i][0], answer]);
+            unsortedData.push([data[i][0], answer]);
         }
 
         results.sort(function(a,b){
@@ -314,7 +318,7 @@
             else string += Math.round(equation[i]*100) / 100;
         }
 
-        return {equation: equation, points: results, string: string};
+        return {equation: equation, unsortedData :unsortedData, points: results, string: string};
     }
     
     /**
@@ -410,9 +414,11 @@
             res[i] = beta * x + alpha;
         }
         console.debug(res);
+        points = xval.map(function(x,i){return [x, res[i]]});
         return { 
             equation: "" , 
-            points: xval.map(function(x,i){return [x, res[i]]}), 
+            unsortedData: points, 
+            points: points, 
             string:""
         } ;
     }
