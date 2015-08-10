@@ -465,7 +465,7 @@
 
         // Calc the mean
         for (i = 0 ; i < data.length ; i++ ){
-            if (data[i][1]) {
+            if ('undefined' !== typeof data[i][1]) {
                 mean += data[i][1];
             } else {
                 N--;
@@ -475,7 +475,7 @@
         
         // Calc the coefficent of determination 
         for (i = 0 ; i < data.length ; i++ ){
-            if (data[i][1]) {
+            if ('undefined' !== typeof data[i][1]) {
                 SSYY +=  Math.pow( data[i][1] -  pred[i][1] , 2) ;
                 SSE +=  Math.pow( data[i][1] -  mean , 2) ;
             }
