@@ -47,8 +47,9 @@
                     regression = _exponential(s.data) 
                 }                                
                 else if (regressionType == "polynomial"){  
-	                var order = s.regressionSettings.order || 2
-                    regression = _polynomial(s.data, order) ;                    
+                    var order = s.regressionSettings.order || 2;
+                    var extrapolateByLength = s.regressionSettings.extrapolate || 0;
+                    regression = _polynomial(s.data, order, extrapolateByLength) ;                    
                 }else if (regressionType == "logarithmic"){
                     regression = _logarithmic(s.data) ;
                 }else if (regressionType == "loess"){
@@ -260,7 +261,7 @@
     /**
      * Code extracted from https://github.com/Tom-Alexander/regression-js/
      */
-    function _polynomial(data, order) {
+    function _polynomial(data, order, extrapolateByLength) {
         if(typeof order == 'undefined'){
             order =2;
         }
@@ -292,12 +293,19 @@
 
         var equation = gaussianElimination(rhs, k);
 
-        for (var i = 0, len = data.length; i < len; i++) {
-            var answer = 0;
-            for (var w = 0; w < equation.length; w++) {
-                answer += equation[w] * Math.pow(data[i][0], w);
+        var resultLength = data.length + extrapolateByLength;
+        var step = data[data.length - 1][0] - data[data.length - 2][0];
+        for (var i = 0, len = resultLength; i < len; i++) {
+            var answer = 0;            
+            var x = data[0][0] + i * step;
+            if(typeof data[i] !== 'undefined') {
+                x = data[i][0];
             }
-            results.push([data[i][0], answer]);
+
+            for (var w = 0; w < equation.length; w++) {
+                answer += equation[w] * Math.pow(x, w);
+            }
+            results.push([x, answer]);
         }
 
         results.sort(function(a,b){
