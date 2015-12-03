@@ -30,6 +30,7 @@
                         lineWidth: 2,
                         marker: {enabled: false} ,
                         isRegressionLine: true,
+                        visible: s.regressionSettings.visible,
                         type: s.regressionSettings.linetype || 'spline',
                         name: s.regressionSettings.name || "Equation: %eq", 
                         color: s.regressionSettings.color || '',
@@ -69,7 +70,11 @@
                 extraSerie.name = extraSerie.name.replace("%r",regression.rValue);
                 extraSerie.name = extraSerie.name.replace("%eq",regression.string);
                 extraSerie.name = extraSerie.name.replace("%se", regression.standardError);
-                
+
+                if(extraSerie.visible == false){
+                    extraSerie.visible = false;   
+                }
+
                 extraSerie.regressionOutputs = regression ;
                 extraSeries.push(extraSerie) ;
                 arguments[1].series[i].rendered = true;                           
