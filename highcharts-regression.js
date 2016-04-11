@@ -20,6 +20,7 @@
                 s.regressionSettings.tooltip = s.regressionSettings.tooltip || {} ;
                 s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || 'solid';
                 s.regressionSettings.decimalPlaces = s.regressionSettings.decimalPlaces || 2;
+                s.regressionSettings.useAllSeries = s.regressionSettings.useAllSeries || false;
 
                 var regressionType = s.regressionSettings.type || "linear" ;
                 var regression; 
@@ -39,32 +40,40 @@
                     	}
                 };
                 
+                var mergedData = s.data;
+                if (s.regressionSettings.useAllSeries) {
+                    mergedData = [];
+                    for (di = 0 ; di < series.length ; di++) {
+                        var seriesToMerge = series[di]
+                        mergedData = mergedData.concat(seriesToMerge.data)
+                    }
+                }
                 
                 if (regressionType == "linear") {
-                    regression = _linear(s.data,s.regressionSettings.decimalPlaces) ;
+                    regression = _linear(mergedData,s.regressionSettings.decimalPlaces) ;
                     extraSerie.type = "line";
                 }else if (regressionType == "exponential") {
-                    regression = _exponential(s.data) 
+                    regression = _exponential(mergedData) 
                 }                                
                 else if (regressionType == "polynomial"){  
                     var order = s.regressionSettings.order || 2;
                     var extrapolate = s.regressionSettings.extrapolate || 0;
-                    regression = _polynomial(s.data, order, extrapolate) ;                    
+                    regression = _polynomial(mergedData, order, extrapolate) ;                    
                 }else if (regressionType == "logarithmic"){
-                    regression = _logarithmic(s.data) ;
+                    regression = _logarithmic(mergedData) ;
                 }else if (regressionType == "loess"){
                     var loessSmooth = s.regressionSettings.loessSmooth || 25
-                    regression = _loess(s.data, loessSmooth/100) ;
+                    regression = _loess(mergedData, loessSmooth/100) ;
                 }else {
                     console.error("Invalid regression type: " , regressionType) ;
                     break;
                 }
 
                 
-                regression.rSquared =  coefficientOfDetermination(s.data, regression.points);
+                regression.rSquared =  coefficientOfDetermination(s.mergedData, regression.points);
                 regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
                 regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
-                regression.standardError = standardError(s.data, regression.points).toFixed(s.regressionSettings.decimalPlaces);
+                regression.standardError = standardError(mergedData, regression.points).toFixed(s.regressionSettings.decimalPlaces);
                 extraSerie.data = regression.points ;
                 extraSerie.name = extraSerie.name.replace("%r2",regression.rSquared);
                 extraSerie.name = extraSerie.name.replace("%r",regression.rValue);
