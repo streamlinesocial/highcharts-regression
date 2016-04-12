@@ -70,7 +70,7 @@
                 }
 
                 
-                regression.rSquared =  coefficientOfDetermination(s.mergedData, regression.points);
+                regression.rSquared =  coefficientOfDetermination(mergedData, regression.points);
                 regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
                 regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
                 regression.standardError = standardError(mergedData, regression.points).toFixed(s.regressionSettings.decimalPlaces);
