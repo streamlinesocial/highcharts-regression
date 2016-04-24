@@ -427,7 +427,7 @@
             var alpha = meanY - beta * meanX;
             res[i] = beta * x + alpha;
         }
-        console.debug(res);
+        //console.debug(res);
         return { 
             equation: "" , 
             points: xval.map(function(x,i){return [x, res[i]]}), 
