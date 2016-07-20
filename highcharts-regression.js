@@ -475,6 +475,14 @@
         
         var i = SSE = SSYY =  mean = 0, N = data.length;
 
+		// Sort the initial data { pred array (model's predictions) is sorted  }
+        // The initial data must be sorted in the same way in order to calculate the coefficients
+        data.sort(function(a,b){
+            if(a[0] > b[0]){ return 1}
+            if(a[0] < b[0]){ return -1}
+            return 0;
+        });
+		
         // Calc the mean
         for (i = 0 ; i < data.length ; i++ ){
             if (data[i][1] != null) {
