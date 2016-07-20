@@ -27,11 +27,14 @@
 	"bugs": "https://github.com/phpepe/highcharts-regression/issues",
 	"download": "https://github.com/phpepe/highcharts-regression/archive/master.zip",
 	"demo": [
+		"http://jsfiddle.net/3g4ryLc9/4/",
 		"http://jsfiddle.net/phpepe/3vruC/",
 		"http://jsfiddle.net/phpepe/sMJv9/",
 		"http://jsfiddle.net/phpepe/72tBr/",
 		"http://jsfiddle.net/3g4ryLc9/",
-		"http://jsfiddle.net/3g4ryLc9/2/"
+		"http://jsfiddle.net/3g4ryLc9/2/",
+		"http://jsfiddle.net/3g4ryLc9/5/"
+		
 	],
 	"maintainers": [
 		{
