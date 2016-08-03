@@ -34,6 +34,7 @@
                         visible: s.regressionSettings.visible,
                         type: s.regressionSettings.linetype || 'spline',
                         name: s.regressionSettings.name || "Equation: %eq", 
+                        id: s.regressionSettings.id,
                         color: s.regressionSettings.color || '',
                         dashStyle: s.regressionSettings.dashStyle || 'solid',
                         tooltip:{ 
