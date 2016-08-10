@@ -108,11 +108,11 @@
         var sum = [0, 0, 0, 0, 0, 0], n = 0, results = [];
 
         for (len = data.length; n < len; n++) {
-          if (data[n].x !== null) {
+          if (data[n].x != null) {
             data[n][0] = data[n].x;
             data[n][1] = data[n].y;
           }
-          if (data[n][1] !== null) {
+          if (data[n][1] != null) {
             sum[0] += data[n][0]; // X
             sum[1] += data[n][1]; // Y
             sum[2] += data[n][0] * data[n][0] * data[n][1]; // XXY
@@ -158,11 +158,11 @@
         var sum = [0, 0, 0, 0, 0], n = 0, results = [], N = data.length;
 
         for (; n < data.length; n++) {
-          if (data[n]['x'] !== null) {
+          if (data[n]['x'] != null) {
             data[n][0] = data[n].x;
             data[n][1] = data[n].y;
           }
-          if (data[n][1] !== null) {
+          if (data[n][1] != null) {
             sum[0] += data[n][0]; //Σ(X) 
             sum[1] += data[n][1]; //Σ(Y)
             sum[2] += data[n][0] * data[n][0]; //Σ(X^2)
@@ -203,11 +203,11 @@
         
 
         for (len = data.length; n < len; n++) {
-          if (data[n].x !== null) {
+          if (data[n].x != null) {
             data[n][0] = data[n].x;
             data[n][1] = data[n].y;
           }
-          if (data[n][1] !== null) {
+          if (data[n][1] != null) {
             sum[0] += Math.log(data[n][0]);
             sum[1] += data[n][1] * Math.log(data[n][0]);
             sum[2] += data[n][1];
@@ -241,11 +241,11 @@
         var sum = [0, 0, 0, 0], n = 0, results = [];
 
         for (len = data.length; n < len; n++) {
-          if (data[n].x !== null) {
+          if (data[n].x != null) {
             data[n][0] = data[n].x;
             data[n][1] = data[n].y;
           }
-          if (data[n][1] !== null) {
+          if (data[n][1] != null) {
             sum[0] += Math.log(data[n][0]);
             sum[1] += Math.log(data[n][1]) * Math.log(data[n][0]);
             sum[2] += Math.log(data[n][1]);
@@ -283,11 +283,11 @@
 
         for (; i < k; i++) {
             for (var l = 0, len = data.length; l < len; l++) {
-                if (data[l].x !== null) {
+                if (data[l].x != null) {
                     data[l][0] = data[l].x;
                     data[l][1] = data[l].y;
                 }
-                if (data[l][1] !== null) {
+                if (data[l][1] != null) {
                     a += Math.pow(data[l][0], i) * data[l][1];
                 }
             }
@@ -493,7 +493,7 @@
 		
         // Calc the mean
         for (i = 0 ; i < data.length ; i++ ){
-            if (data[i][1] !== null) {
+            if (data[i][1] != null) {
                 mean += data[i][1];
             } else {
                 N--;
@@ -503,7 +503,7 @@
         
         // Calc the coefficent of determination 
         for (i = 0 ; i < data.length ; i++ ){
-            if (data[i][1] !== null) {
+            if (data[i][1] != null) {
                 SSYY +=  Math.pow( data[i][1] -  pred[i][1] , 2) ;
                 SSE +=  Math.pow( data[i][1] -  mean , 2) ;
             }
@@ -515,7 +515,7 @@
         var SE = 0, N = data.length;
 
         for (i = 0 ; i < data.length ; i++ ) {
-            if (data[i][1] !== null) {
+            if (data[i][1] != null) {
                 SE += Math.pow(data[i][1] - pred[i][1], 2);
             } else {
                 N--;
