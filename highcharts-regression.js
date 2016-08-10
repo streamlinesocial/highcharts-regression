@@ -26,7 +26,7 @@
                 var regression; 
                 var extraSerie = {
                         data:[],
-                        color: s.color ,
+                        color: s.regressionSettings.color || '',
                         yAxis: s.yAxis ,
                         lineWidth: 2,
                         marker: {enabled: false} ,
@@ -35,7 +35,6 @@
                         type: s.regressionSettings.linetype || 'spline',
                         name: s.regressionSettings.name || "Equation: %eq", 
                         id: s.regressionSettings.id,
-                        color: s.regressionSettings.color || '',
                         dashStyle: s.regressionSettings.dashStyle || 'solid',
                         tooltip:{ 
 	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
@@ -46,8 +45,8 @@
                 if (s.regressionSettings.useAllSeries) {
                     mergedData = [];
                     for (di = 0 ; di < series.length ; di++) {
-                        var seriesToMerge = series[di]
-                        mergedData = mergedData.concat(seriesToMerge.data)
+                        var seriesToMerge = series[di];
+                        mergedData = mergedData.concat(seriesToMerge.data);
                     }
                 }
                 
@@ -55,16 +54,16 @@
                     regression = _linear(mergedData,s.regressionSettings.decimalPlaces) ;
                     extraSerie.type = "line";
                 }else if (regressionType == "exponential") {
-                    regression = _exponential(mergedData) 
+                    regression = _exponential(mergedData) ;
                 }                                
                 else if (regressionType == "polynomial"){  
                     var order = s.regressionSettings.order || 2;
                     var extrapolate = s.regressionSettings.extrapolate || 0;
-                    regression = _polynomial(mergedData, order, extrapolate) ;                    
+                    regression = _polynomial(mergedData, order, extrapolate) ;
                 }else if (regressionType == "logarithmic"){
                     regression = _logarithmic(mergedData) ;
                 }else if (regressionType == "loess"){
-                    var loessSmooth = s.regressionSettings.loessSmooth || 25
+                    var loessSmooth = s.regressionSettings.loessSmooth || 25;
                     regression = _loess(mergedData, loessSmooth/100) ;
                 }else {
                     console.error("Invalid regression type: " , regressionType) ;
@@ -82,7 +81,7 @@
                 extraSerie.name = extraSerie.name.replace("%eq",regression.string);
                 extraSerie.name = extraSerie.name.replace("%se", regression.standardError);
 
-                if(extraSerie.visible == false){
+                if(extraSerie.visible === false){
                     extraSerie.visible = false;   
                 }
 
@@ -109,11 +108,11 @@
         var sum = [0, 0, 0, 0, 0, 0], n = 0, results = [];
 
         for (len = data.length; n < len; n++) {
-          if (data[n]['x'] != null) {
-            data[n][0] = data[n]['x'];
-            data[n][1] = data[n]['y'];
+          if (data[n].x !== null) {
+            data[n][0] = data[n].x;
+            data[n][1] = data[n].y;
           }
-          if (data[n][1] != null) {
+          if (data[n][1] !== null) {
             sum[0] += data[n][0]; // X
             sum[1] += data[n][1]; // Y
             sum[2] += data[n][0] * data[n][0] * data[n][1]; // XXY
@@ -133,8 +132,8 @@
         }
 
         results.sort(function(a,b){
-           if(a[0] > b[0]){ return 1}
-            if(a[0] < b[0]){ return -1}
+           if(a[0] > b[0]){ return 1;}
+            if(a[0] < b[0]){ return -1;}
               return 0;
         });
 
@@ -159,11 +158,11 @@
         var sum = [0, 0, 0, 0, 0], n = 0, results = [], N = data.length;
 
         for (; n < data.length; n++) {
-          if (data[n]['x'] != null) {
-            data[n][0] = data[n]['x'];
-            data[n][1] = data[n]['y'];
+          if (data[n]['x'] !== null) {
+            data[n][0] = data[n].x;
+            data[n][1] = data[n].y;
           }
-          if (data[n][1] != null) {
+          if (data[n][1] !== null) {
             sum[0] += data[n][0]; //Σ(X) 
             sum[1] += data[n][1]; //Σ(Y)
             sum[2] += data[n][0] * data[n][0]; //Σ(X^2)
@@ -187,8 +186,8 @@
         }
 
         results.sort(function(a,b){
-           if(a[0] > b[0]){ return 1}
-            if(a[0] < b[0]){ return -1}
+           if(a[0] > b[0]){ return 1;}
+            if(a[0] < b[0]){ return -1;}
               return 0;
         });
 
@@ -204,11 +203,11 @@
         
 
         for (len = data.length; n < len; n++) {
-          if (data[n]['x'] != null) {
-            data[n][0] = data[n]['x'];
-            data[n][1] = data[n]['y'];
+          if (data[n].x !== null) {
+            data[n][0] = data[n].x;
+            data[n][1] = data[n].y;
           }
-          if (data[n][1] != null) {
+          if (data[n][1] !== null) {
             sum[0] += Math.log(data[n][0]);
             sum[1] += data[n][1] * Math.log(data[n][0]);
             sum[2] += data[n][1];
@@ -225,8 +224,8 @@
         }
 
         results.sort(function(a,b){
-           if(a[0] > b[0]){ return 1}
-            if(a[0] < b[0]){ return -1}
+           if(a[0] > b[0]){ return 1;}
+            if(a[0] < b[0]){ return -1;}
               return 0;
         });
 
@@ -242,11 +241,11 @@
         var sum = [0, 0, 0, 0], n = 0, results = [];
 
         for (len = data.length; n < len; n++) {
-          if (data[n]['x'] != null) {
-            data[n][0] = data[n]['x'];
-            data[n][1] = data[n]['y'];
+          if (data[n].x !== null) {
+            data[n][0] = data[n].x;
+            data[n][1] = data[n].y;
           }
-          if (data[n][1] != null) {
+          if (data[n][1] !== null) {
             sum[0] += Math.log(data[n][0]);
             sum[1] += Math.log(data[n][1]) * Math.log(data[n][0]);
             sum[2] += Math.log(data[n][1]);
@@ -263,8 +262,8 @@
         }
 
         results.sort(function(a,b){
-           if(a[0] > b[0]){ return 1}
-            if(a[0] < b[0]){ return -1}
+           if(a[0] > b[0]){ return 1;}
+            if(a[0] < b[0]){ return -1;}
               return 0;
         });
 
@@ -284,15 +283,16 @@
 
         for (; i < k; i++) {
             for (var l = 0, len = data.length; l < len; l++) {
-                if (data[l]['x'] != null) {
-                    data[l][0] = data[l]['x'];
-                    data[l][1] = data[l]['y'];
+                if (data[l].x !== null) {
+                    data[l][0] = data[l].x;
+                    data[l][1] = data[l].y;
                 }
-                if (data[l][1] != null) {
+                if (data[l][1] !== null) {
                     a += Math.pow(data[l][0], i) * data[l][1];
                 }
             }
-            lhs.push(a), a = 0;
+            lhs.push(a);
+            a = 0;
             var c = [];
             for (var j = 0; j < k; j++) {
                 for (var l = 0, len = data.length; l < len; l++) {
@@ -300,7 +300,8 @@
                         b += Math.pow(data[l][0], i + j);
                     }
                 }
-                c.push(b), b = 0;
+                c.push(b);
+                b = 0;
             }
             rhs.push(c);
         }
@@ -311,11 +312,12 @@
         var resultLength = data.length + extrapolate;
         var step = data[data.length - 1][0] - data[data.length - 2][0];
         for (var i = 0, len = resultLength; i < len; i++) {
-            var answer = 0;            
+            var answer = 0,
+              x = 0;            
             if(typeof data[i] !== 'undefined') {
-                var x = data[i][0];
+                x = data[i][0];
             } else {
-                var x = data[data.length - 1][0] + (i - data.length) * step;    
+                x = data[data.length - 1][0] + (i - data.length) * step;    
             }
 
             for (var w = 0; w < equation.length; w++) {
@@ -325,8 +327,8 @@
         }
 
         results.sort(function(a,b){
-           if(a[0] > b[0]){ return 1}
-            if(a[0] < b[0]){ return -1}
+           if(a[0] > b[0]){ return 1;}
+            if(a[0] < b[0]){ return -1;}
               return 0;
         });
 
@@ -348,16 +350,16 @@
      * - https://gist.github.com/avibryant/1151823
      */
     function _loess (data, bandwidth) {
-        var bandwidth = bandwidth || 0.25 ;
+        bandwidth = bandwidth || 0.25 ;
         
-        var xval = data.map(function(pair){return pair[0]});
+        var xval = data.map(function(pair){return pair[0];});
         var distinctX =  array_unique(xval) ;
         if (  2 / distinctX.length  > bandwidth ) {
             bandwidth = Math.min( 2 / distinctX.length, 1 );
             console.warn("updated bandwith to "+ bandwidth);
         }
         
-        var yval = data.map(function(pair){return pair[1]});
+        var yval = data.map(function(pair){return pair[1];});
         
         function array_unique(values) {
             var o = {}, i, l = values.length, r = [];
@@ -436,7 +438,7 @@
         //console.debug(res);
         return { 
             equation: "" , 
-            points: xval.map(function(x,i){return [x, res[i]]}), 
+            points: xval.map(function(x,i){return [x, res[i]];}), 
             string:""
         } ;
     }
@@ -484,14 +486,14 @@
 		// Sort the initial data { pred array (model's predictions) is sorted  }
         // The initial data must be sorted in the same way in order to calculate the coefficients
         data.sort(function(a,b){
-            if(a[0] > b[0]){ return 1}
-            if(a[0] < b[0]){ return -1}
+            if(a[0] > b[0]){ return 1;}
+            if(a[0] < b[0]){ return -1;}
             return 0;
         });
 		
         // Calc the mean
         for (i = 0 ; i < data.length ; i++ ){
-            if (data[i][1] != null) {
+            if (data[i][1] !== null) {
                 mean += data[i][1];
             } else {
                 N--;
@@ -501,7 +503,7 @@
         
         // Calc the coefficent of determination 
         for (i = 0 ; i < data.length ; i++ ){
-            if (data[i][1] != null) {
+            if (data[i][1] !== null) {
                 SSYY +=  Math.pow( data[i][1] -  pred[i][1] , 2) ;
                 SSE +=  Math.pow( data[i][1] -  mean , 2) ;
             }
@@ -513,7 +515,7 @@
         var SE = 0, N = data.length;
 
         for (i = 0 ; i < data.length ; i++ ) {
-            if (data[i][1] != null) {
+            if (data[i][1] !== null) {
                 SE += Math.pow(data[i][1] - pred[i][1], 2);
             } else {
                 N--;
