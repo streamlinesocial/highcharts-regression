@@ -37,6 +37,7 @@
                         id: s.regressionSettings.id,
                         color: s.regressionSettings.color || '',
                         dashStyle: s.regressionSettings.dashStyle || 'solid',
+                        showInLegend: !s.regressionSettings.hideInLegend,
                         tooltip:{ 
 	                        	valueSuffix : s.regressionSettings.tooltip.valueSuffix || ' '
                     	}
