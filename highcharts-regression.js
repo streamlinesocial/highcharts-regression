@@ -28,7 +28,7 @@
                         data:[],
                         color: s.color ,
                         yAxis: s.yAxis ,
-                        lineWidth: 2,
+                        lineWidth: s.regressionSettings.lineWidth || 2,
                         marker: {enabled: false} ,
                         isRegressionLine: true,
                         visible: s.regressionSettings.visible,
