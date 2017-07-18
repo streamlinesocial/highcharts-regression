@@ -314,7 +314,7 @@
         var step = data[data.length - 1][0] - data[data.length - 2][0];
         for (var i = 0, len = resultLength; i < len; i++) {
             var answer = 0,
-              x = 0;            
+            var x = 0;
             if(typeof data[i] !== 'undefined') {
                 x = data[i][0];
             } else {
@@ -481,10 +481,7 @@
      * See http://en.wikipedia.org/wiki/Coefficient_of_determination for theaorical details 
      */
     function coefficientOfDetermination (data, pred ) {
-        
-        var i = SSE = SSYY =  mean = 0, N = data.length;
-
-		// Sort the initial data { pred array (model's predictions) is sorted  }
+        // Sort the initial data { pred array (model's predictions) is sorted  }
         // The initial data must be sorted in the same way in order to calculate the coefficients
         data.sort(function(a,b){
             if(a[0] > b[0]){ return 1;}
@@ -493,7 +490,9 @@
         });
 		
         // Calc the mean
-        for (i = 0 ; i < data.length ; i++ ){
+        var mean = 0;
+        var N = data.length;
+        for (var i = 0 ; i < data.length ; i++ ){
             if (data[i][1] != null) {
                 mean += data[i][1];
             } else {
@@ -502,8 +501,10 @@
         }
         mean /= N;
         
-        // Calc the coefficent of determination 
-        for (i = 0 ; i < data.length ; i++ ){
+        // Calc the coefficent of determination
+        var SSE = 0;
+        var SSYY = 0;
+        for (var i = 0 ; i < data.length ; i++ ){
             if (data[i][1] != null) {
                 SSYY +=  Math.pow( data[i][1] -  pred[i][1] , 2) ;
                 SSE +=  Math.pow( data[i][1] -  mean , 2) ;
@@ -515,7 +516,7 @@
     function standardError(data, pred) {
         var SE = 0, N = data.length;
 
-        for (i = 0 ; i < data.length ; i++ ) {
+        for (var i = 0 ; i < data.length ; i++ ) {
             if (data[i][1] != null) {
                 SE += Math.pow(data[i][1] - pred[i][1], 2);
             } else {
