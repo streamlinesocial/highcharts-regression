@@ -313,7 +313,7 @@
         var resultLength = data.length + extrapolate;
         var step = data[data.length - 1][0] - data[data.length - 2][0];
         for (var i = 0, len = resultLength; i < len; i++) {
-            var answer = 0,
+            var answer = 0;
             var x = 0;
             if(typeof data[i] !== 'undefined') {
                 x = data[i][0];
