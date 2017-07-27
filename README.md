@@ -14,7 +14,7 @@ And for advanced configuration you can add options to
 
     regressionSettings: {}
     
-#### Regression settings: 
+### Regression settings: 
 
 ##### `type ` (String)
 Regression type: 'linear' ,'exponential', 'polynomial', 'logarithmic', 'loess'. Default: `linear`
@@ -61,9 +61,18 @@ Whether to show the line itself. Hiding the line will grey out its legend item. 
 The opposite of `visible`: show the line but not its legend item. Default: `false`
 
 ##### `tooltip` (Object)
-Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/tooltip).
+Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/tooltip)
 
-####  Examples:
+### Exposed properties:
+The plugin exposes properties to `series[regressionSeries].options.regressionOutputs (Object)`
+* `equation` (Array[Int]) individual parts of the regression equation
+* `points` (Array)
+* `rSquared` (Int)
+* `rValue` (Int)
+* `standardError` (Int)
+* `string` (String) the resulting formula in string format
+
+###  Examples:
 * [Basic default settings: linear regression with equation in the legend](http://jsfiddle.net/phpepe/q5jm4d7k/)
 * [Polynomial regression - with extrapolation and different style](http://jsfiddle.net/phpepe/8457ctpj/)
 * [Linear regression](http://jsfiddle.net/phpepe/3vruC/)
