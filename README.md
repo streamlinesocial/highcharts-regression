@@ -16,9 +16,52 @@ And for advanced configuration you can add options to
     
 #### Regression settings: 
 
-* `type ` (String) Regression type: 'linear' ,'exponential', 'polynomial', 'logarithmic', 'loess' 
-* `order` (Int) If regression type is polynomial set the order
+##### `type ` (String)
+Regression type: 'linear' ,'exponential', 'polynomial', 'logarithmic', 'loess'. Default: `linear`
 
+##### `order` (Int)
+Set the order (polynomial only). Default: `2`
+
+##### `name` (String)
+The name as it appears in the legend and tooltip. Use the following replacements:
+* `%r2`: Value of r<sup>2</sup>
+* `%r`:  Value of r
+* `%eq`: Regression equation
+* `%se`: Standard error
+Default: `Equation: %eq`
+
+##### `decimalPlaces` (Int)
+Set the number of decimal places for r and r<sup>2</sup> (linear only). Default: `2`
+
+##### `lineType` (String)
+??. Default: `spline`
+
+##### `lineWidth` (Int)
+The width of the regression line. Default: `2`
+
+##### `dashStyle` (String)
+Use one of Highcharts-recognized dash styles. Default: `solid`
+
+##### `color` (String)
+Use one of Highcharts-recognized color definitions. Default: none.
+
+##### `useAllSeries` (Boolean)
+??. Default: `false`
+
+##### `extrapolate` (Int)
+??. Default: `0`
+
+##### `loessSmooth` (Int)
+??. Default: `25`
+
+##### `visible` (Boolean)
+Whether to show the line itself. Hiding the line will grey out its legend item. Default: `true`
+
+##### `hideInLegend` (Boolean)
+The opposite of `visible`: show the line but not its legend item. Default: `false`
+
+##### `tooltip` (Object)
+Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/tooltip).
 
 ####  Examples:
 * [Basic default settings: linear regression with equation in the legend](http://jsfiddle.net/phpepe/q5jm4d7k/)
