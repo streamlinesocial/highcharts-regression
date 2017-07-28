@@ -24,8 +24,8 @@ Set the order (polynomial only). Default: `2`
 
 ##### `name` (String)
 The name as it appears in the legend and tooltip. Use the following replacements:
-* `%r2`: Value of r<sup>2</sup>
-* `%r`:  Value of r
+* `%r`:  Value of [correlation coefficient][wiki-r]
+* `%r2`: Value of [coefficient of determination][wiki-r2]
 * `%eq`: Regression equation
 * `%se`: Standard error
 Default: `Equation: %eq`
@@ -67,8 +67,8 @@ Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/toolti
 The plugin exposes properties to `series[regressionSeries].options.regressionOutputs (Object)`
 * `equation` (Array[Int]) individual parts of the regression equation
 * `points` (Array)
-* `rSquared` (Int)
-* `rValue` (Int)
+* `rValue` (Int) [correlation coefficient][wiki-r]
+* `rSquared` (Int) [coefficient of determination][wiki-r2]
 * `standardError` (Int)
 * `string` (String) the resulting formula in string format
 
@@ -83,3 +83,6 @@ The plugin exposes properties to `series[regressionSeries].options.regressionOut
 * http://jsfiddle.net/3g4ryLc9/5/
 
 
+
+[wiki-r]: https://en.wikipedia.org/wiki/Correlation_coefficient
+[wiki-r2]: https://en.wikipedia.org/wiki/Coefficient_of_determination
