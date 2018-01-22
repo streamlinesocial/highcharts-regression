@@ -14,13 +14,65 @@ And for advanced configuration you can add options to
 
     regressionSettings: {}
     
-#### Regression settings: 
+### Regression settings: 
 
-* `type ` (String) Regression type: 'linear' ,'exponential', 'polynomial', 'logarithmic', 'loess' 
-* `order` (Int) If regression type is polynomial set the order
+##### `type ` (String)
+Regression type: 'linear' ,'exponential', 'polynomial', 'logarithmic', 'loess'. Default: `linear`
 
+##### `order` (Int)
+Set the order (polynomial only). Default: `2`
 
-####  Examples:
+##### `name` (String)
+The name as it appears in the legend and tooltip. Use the following replacements:
+* `%r`:  Value of [correlation coefficient][wiki-r]
+* `%r2`: Value of [coefficient of determination][wiki-r2]
+* `%eq`: Regression equation
+* `%se`: Standard error
+Default: `Equation: %eq`
+
+##### `decimalPlaces` (Int)
+Set the number of decimal places for r and r<sup>2</sup> (linear only). Default: `2`
+
+##### `lineType` (String)
+??. Default: `spline`
+
+##### `lineWidth` (Int)
+The width of the regression line. Default: `2`
+
+##### `dashStyle` (String)
+Use one of Highcharts-recognized dash styles. Default: `solid`
+
+##### `color` (String)
+Use one of Highcharts-recognized color definitions. Default: none.
+
+##### `useAllSeries` (Boolean)
+??. Default: `false`
+
+##### `extrapolate` (Int)
+??. Default: `0`
+
+##### `loessSmooth` (Int)
+??. Default: `25`
+
+##### `visible` (Boolean)
+Whether to show the line itself. Hiding the line will grey out its legend item. Default: `true`
+
+##### `hideInLegend` (Boolean)
+The opposite of `visible`: show the line but not its legend item. Default: `false`
+
+##### `tooltip` (Object)
+Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/tooltip)
+
+### Exposed properties:
+The plugin exposes properties to `series[regressionSeries].options.regressionOutputs (Object)`
+* `equation` (Array[Int]) individual parts of the regression equation
+* `points` (Array)
+* `rValue` (Int) [correlation coefficient][wiki-r]
+* `rSquared` (Int) [coefficient of determination][wiki-r2]
+* `standardError` (Int)
+* `string` (String) the resulting formula in string format
+
+###  Examples:
 * [Basic default settings: linear regression with equation in the legend](http://jsfiddle.net/phpepe/q5jm4d7k/)
 * [Polynomial regression - with extrapolation and different style](http://jsfiddle.net/phpepe/8457ctpj/)
 * [Linear regression](http://jsfiddle.net/phpepe/3vruC/)
@@ -31,3 +83,6 @@ And for advanced configuration you can add options to
 * http://jsfiddle.net/3g4ryLc9/5/
 
 
+
+[wiki-r]: https://en.wikipedia.org/wiki/Correlation_coefficient
+[wiki-r2]: https://en.wikipedia.org/wiki/Coefficient_of_determination
