@@ -17,7 +17,7 @@ And for advanced configuration you can add options to
 ### Regression settings: 
 
 ##### `type ` (String)
-Regression type: 'linear' ,'exponential', 'polynomial', 'logarithmic', 'loess'. Default: `linear`
+Regression type: 'linear' ,'exponential', 'polynomial', 'power', 'logarithmic', 'loess'. Default: `linear`
 
 ##### `order` (Int)
 Set the order (polynomial only). Default: `2`
