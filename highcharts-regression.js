@@ -1,4 +1,12 @@
-(function (H) {
+(function (factory) {
+    "use strict";
+
+    if (typeof module === "object" && module.exports) {
+        module.exports = factory;
+    } else {
+        factory(Highcharts);
+    }
+}(function (H) {
     var processSerie = function (s, method, chart) {
         if (s.regression && !s.rendered) {
             s.regressionSettings = s.regressionSettings || {};
@@ -559,6 +567,4 @@
 
         return SE;
     }
-
-
-}(Highcharts));
+}));

@@ -1,0 +1,31 @@
+{
+  "name": "highcharts-regression",
+  "version": "1.0.5",
+  "description": "This allows you to add regression lines to any series. Supports: linear, polynomial, logarithmic, exponential and loess. Calculates the r-value",
+  "main": "highcharts-regression.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phpepe/highcharts-regression.git"
+  },
+  "keywords": [
+    "highcharts",
+    "regression",
+    "trendline",
+    "loess fitline"
+  ],
+  "author": {
+    "name": "Ignacio Vazquez",
+    "url": "https://github.com/phpepe/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phpepe/highcharts-regression/issues"
+  },
+  "homepage": "https://github.com/phpepe/highcharts-regression#readme"
+}
