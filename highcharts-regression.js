@@ -54,6 +54,8 @@
                 var order = s.regressionSettings.order || 2;
                 var extrapolate = s.regressionSettings.extrapolate || 0;
                 regression = _polynomial(mergedData, order, extrapolate);
+            } else if (regressionType == "power") {
+                regression = _power(mergedData);
             } else if (regressionType == "logarithmic") {
                 regression = _logarithmic(mergedData);
             } else if (regressionType == "loess") {
