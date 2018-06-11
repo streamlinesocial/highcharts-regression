@@ -88,22 +88,24 @@
     H.wrap(H.Chart.prototype, 'init', function (proceed) {
         var series = arguments[1].series;
         var extraSeries = [];
-        var i = 0;
-        for (i = 0; i < series.length; i++) {
-            var s = series[i];
-            var extraSerie = processSerie(s, 'init', this);
-            extraSeries.push(extraSerie);
+        for (var i = 0; i < series.length; i++) {
+
+            var extraSerie = processSerie(series[i], 'init', this);
             arguments[1].series[i].rendered = true;
+
+            if (extraSerie) {
+                extraSeries.push(extraSerie);
+            }
         }
 
-        if (extraSerie) {
+        if (series && extraSeries.length > 0) {
             arguments[1].series = series.concat(extraSeries);
         }
 
         proceed.apply(this, Array.prototype.slice.call(arguments, 1));
 
-
     });
+
 
     H.wrap(H.Chart.prototype, 'addSeries', function (proceed) {
         var s = arguments[1];
