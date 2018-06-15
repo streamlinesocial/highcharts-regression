@@ -67,9 +67,9 @@
             }
 
             regression.rSquared = coefficientOfDetermination(mergedData, regression.points);
-            regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
-            regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
-            regression.standardError = standardError(mergedData, regression.points).toFixed(s.regressionSettings.decimalPlaces);
+            regression.rValue = _round(Math.sqrt(regression.rSquared), s.regressionSettings.decimalPlaces);
+            regression.rSquared = _round(regression.rSquared, s.regressionSettings.decimalPlaces);
+            regression.standardError = _round(standardError(mergedData, regression.points), s.regressionSettings.decimalPlaces);
             extraSerie.data = regression.points;
             extraSerie.name = extraSerie.name.replace("%r2", regression.rSquared);
             extraSerie.name = extraSerie.name.replace("%r", regression.rValue);
@@ -568,5 +568,10 @@
         SE = Math.sqrt(SE / (N - 2));
 
         return SE;
+    }
+
+    function _round(number, decimalPlaces) {
+        var decimalFactor = Math.pow(10, decimalPlaces);
+        return Math.round(number * decimalFactor) / decimalFactor;
     }
 }));
