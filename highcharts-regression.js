@@ -381,7 +381,7 @@
             return 0;
         });
 
-        var string = 'y = ' + A.toExponential(decimalPlaces) + 'x^' + _round(B, decimalPlaces);
+        var string = 'y = ' + _round(A, decimalPlaces) + 'x^' + _round(B, decimalPlaces);
 
         return {equation: [A, B], points: results, string: string};
     }
@@ -654,6 +654,10 @@
     }
 
     function _round(number, decimalPlaces) {
+        // Smaller than 0.xxxx (decimalPlaces), use scientific notation
+        if (number < Math.pow(10, -decimalPlaces)) {
+            return number.toExponential(decimalPlaces);
+        }
         var decimalFactor = Math.pow(10, decimalPlaces);
         return Math.round(number * decimalFactor) / decimalFactor;
     }
