@@ -91,9 +91,11 @@
         var i = 0;
         for (i = 0; i < series.length; i++) {
             var s = series[i];
-            var extraSerie = processSerie(s, 'init', this);
-            extraSeries.push(extraSerie);
-            arguments[1].series[i].rendered = true;
+            if (s.regression) {
+                var extraSerie = processSerie(s, 'init', this);
+                extraSeries.push(extraSerie);
+                arguments[1].series[i].rendered = true;
+            }
         }
 
         if (extraSerie) {
