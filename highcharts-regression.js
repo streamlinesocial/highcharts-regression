@@ -114,7 +114,7 @@
         if (extraSerie) {
             this.addSeries(extraSerie);
         }
-        proceed.apply(this, Array.prototype.slice.call(arguments, 1));
+        return proceed.apply(this, Array.prototype.slice.call(arguments, 1));
     });
 
 
