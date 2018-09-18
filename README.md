@@ -82,7 +82,7 @@ The plugin exposes properties to `series[regressionSeries].options.regressionOut
 * http://jsfiddle.net/3g4ryLc9/
 * http://jsfiddle.net/3g4ryLc9/2/
 * http://jsfiddle.net/3g4ryLc9/5/
-
+* [Drilldown support] (http://jsfiddle.net/cmz25dtw/9/)
 
 
 [wiki-r]: https://en.wikipedia.org/wiki/Correlation_coefficient
