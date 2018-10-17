@@ -60,6 +60,12 @@ Whether to show the line itself. Hiding the line will grey out its legend item. 
 ##### `hideInLegend` (Boolean)
 The opposite of `visible`: show the line but not its legend item. Default: `false`
 
+##### `index` (Int)
+The index of the series in the chart, affecting the internal index in the chart.series array, the visible Z index as well as the order in the legend. Default: `undefined`
+
+##### `legendIndex` (Int)
+The sequential index of the series in the legend. Default: `undefined`
+
 ##### `tooltip` (Object)
 Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/tooltip)
 
