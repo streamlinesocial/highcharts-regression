@@ -1,4 +1,4 @@
-(function (factory) {
+﻿(function (factory) {
     "use strict";
 
     if (typeof module === "object" && module.exports) {
@@ -34,6 +34,13 @@
                     valueSuffix: s.regressionSettings.tooltip.valueSuffix || ' '
                 }
             };
+
+            if (typeof s.regressionSettings.index !== 'undefined') {
+                extraSerie.index = s.regressionSettings.index;
+            }
+            if (typeof s.regressionSettings.legendIndex !== 'undefined') {
+                extraSerie.legendIndex = s.regressionSettings.legendIndex;
+            }
 
             var mergedData = s.data;
             if (s.regressionSettings.useAllSeries) {
