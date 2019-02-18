@@ -108,12 +108,14 @@
         var series = arguments[1].series;
         var extraSeries = [];
         var i = 0;
-        for (i = 0; i < series.length; i++) {
-            var s = series[i];
-            if (s.regression) {
-                var extraSerie = processSerie(s, 'init', this);
-                extraSeries.push(extraSerie);
-                arguments[1].series[i].rendered = true;
+        if (series) {
+            for (i = 0; i < series.length; i++) {
+                var s = series[i];
+                if (s.regression) {
+                    var extraSerie = processSerie(s, 'init', this);
+                    extraSeries.push(extraSerie);
+                    arguments[1].series[i].rendered = true;
+                }
             }
         }
 
