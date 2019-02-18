@@ -1,11 +1,23 @@
-﻿(function (factory) {
-    "use strict";
-
-    if (typeof module === "object" && module.exports) {
+﻿(function(factory) {
+	"use strict";
+	
+	if (typeof module === "object" && module.exports) {
         module.exports = factory;
     } else {
-        factory(Highcharts);
-    }
+		if(typeof define === "function" && define.amd){
+			define(function() {
+				return factory
+			});
+		}
+		else{
+			if(typeof Highcharts !== "undefined"){
+				factory(Highcharts);
+			}
+			else{
+				void 0;
+			}
+		}
+    }	
 }(function (H) {
     var processSerie = function (s, method, chart) {
         if (s.regression && !s.rendered) {
