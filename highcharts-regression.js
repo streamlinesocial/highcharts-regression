@@ -1,6 +1,6 @@
-﻿(function(factory) {
+(function(factory) {
 	"use strict";
-	
+
 	if (typeof module === "object" && module.exports) {
         module.exports = factory;
     } else {
@@ -17,7 +17,7 @@
 				void 0;
 			}
 		}
-    }	
+    }
 }(function (H) {
     var processSerie = function (s, method, chart) {
         if (s.regression && !s.rendered) {
@@ -455,7 +455,7 @@
         bandwidth = bandwidth || 0.25;
 
         var xval = data.map(function (pair) {
-            return pair[0];
+            return pair.x || pair[0];
         });
         var distinctX = array_unique(xval);
         if (2 / distinctX.length > bandwidth) {
@@ -464,7 +464,7 @@
         }
 
         var yval = data.map(function (pair) {
-            return pair[1];
+            return pair.y || pair[1];
         });
 
         function array_unique(values) {
