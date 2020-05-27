@@ -84,6 +84,7 @@ The plugin exposes properties to `series[regressionSeries].options.regressionOut
 * [Linear regression](http://jsfiddle.net/phpepe/3vruC/)
 * [Loess regression 50% smooth](http://jsfiddle.net/phpepe/sMJv9/)
 * [Linear regression with coeficient of determination](http://jsfiddle.net/phpepe/ofgpk5rp/)
+* [Linear regression with coeficient of determination 2](http://jsfiddle.net/phpepe/knyao3w9/)
 * [Download resgression data on different formats](http://jsfiddle.net/gbsnpgdw/2/)
 * http://jsfiddle.net/3g4ryLc9/
 * http://jsfiddle.net/3g4ryLc9/2/
