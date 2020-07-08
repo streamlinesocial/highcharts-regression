@@ -69,6 +69,17 @@ The sequential index of the series in the legend. Default: `undefined`
 ##### `tooltip` (Object)
 Stardard Highcharts [tooltip object](http://api.highcharts.com/highcharts/tooltip)
 
+##### `dataLabels` (Array of objects)
+Show dataLabels on specified points. Choose which points should have labels and enter their format. Supports Highchart [dataLabel.format](https://api.highcharts.com/highcharts/plotOptions.series.dataLabels.format) and the regression variables stated for [name](#name-string). Default: `undefined`
+
+Format expected for dataLabel objects:
+```
+{
+  pointIndex: number // Index of the point to add label to.
+  format: string // The text/format for the label.
+}
+```
+
 ### Exposed properties:
 The plugin exposes properties to `series[regressionSeries].options.regressionOutputs (Object)`
 * `equation` (Array[Int]) individual parts of the regression equation
