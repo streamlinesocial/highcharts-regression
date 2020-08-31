@@ -1,6 +1,6 @@
 {
   "name": "highcharts-regression",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "This allows you to add regression lines to any series. Supports: linear, polynomial, logarithmic, exponential and loess. Calculates the r-value",
   "main": "highcharts-regression.js",
   "directories": {
