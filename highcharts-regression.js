@@ -39,6 +39,7 @@
                 visible: s.regressionSettings.visible,
                 type: s.regressionSettings.linetype || 'spline',
                 name: s.regressionSettings.name || "Equation: %eq",
+                label: s.regressionSettings.label || {},
                 id: s.regressionSettings.id,
                 dashStyle: s.regressionSettings.dashStyle || 'solid',
                 showInLegend: !s.regressionSettings.hideInLegend,
