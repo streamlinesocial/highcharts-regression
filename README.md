@@ -80,6 +80,10 @@ Format expected for dataLabel objects:
 }
 ```
 
+##### `regressionSeriesOptions` (Object)
+Standard Highcharts [series object](https://api.highcharts.com/highcharts/series).
+Customize the options for the generated regression series. Default: `undefined`
+
 ### Exposed properties:
 The plugin exposes properties to `series[regressionSeries].options.regressionOutputs (Object)`
 * `equation` (Array[Int]) individual parts of the regression equation
