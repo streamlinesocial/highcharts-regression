@@ -31,7 +31,7 @@ The name as it appears in the legend and tooltip. Use the following replacements
 Default: `Equation: %eq`
 
 ##### `decimalPlaces` (Int)
-Set the number of decimal places for r and r<sup>2</sup> (linear only). Default: `2`
+Set the number of decimal places for r and r<sup>2</sup> (linear and power only). Default: `2`
 
 ##### `lineType` (String)
 ??. Default: `spline`
